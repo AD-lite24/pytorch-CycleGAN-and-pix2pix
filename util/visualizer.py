@@ -235,7 +235,8 @@ class Visualizer():
         except VisdomExceptionBase:
             self.create_visdom_connections()
         if self.use_wandb:
-            self.wandb_run.log(losses)
+            for k, v in losses.items():
+                self.wandb_run.log({"k" : v})
 
     # losses: same format as |losses| of plot_current_losses
     def print_current_losses(self, epoch, iters, losses, t_comp, t_data):
